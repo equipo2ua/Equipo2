@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView obesidad;
     private TextView obesidadsevera;
     private TextView obesidadmorbida;
+    public float valorimc = -1;
+    public TextView estado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +39,25 @@ public class MainActivity extends AppCompatActivity {
         obesidad= (TextView)findViewById(R.id.textView9);
         obesidadsevera= (TextView)findViewById(R.id.textView10);
         obesidadmorbida= (TextView)findViewById(R.id.textView11);
+        estado = (TextView)findViewById(R.id.textView5);
+
     }
 
-    public void IMC(View view){
+    public float IMC(View view){
+
 
         String valor1 = peso.getText().toString();
         String valor2 = altura.getText().toString();
 
-        float x = Float.parseFloat(valor1);
-        float y = Float.parseFloat(valor2);
+
+         float x = Float.parseFloat(valor1);
+         float y = Float.parseFloat(valor2);
+
 
         y = y / 100;
 
         float calculo = x / ( y * y );
+
 
         BigDecimal bg = new BigDecimal(calculo).setScale(2, RoundingMode.UP);
 
@@ -57,48 +65,111 @@ public class MainActivity extends AppCompatActivity {
 
         resultado.setText(result);
 
-        if (calculo < 18.5){
-
-            String a = "Tu";
-
-            bajopeso.setText(a);
-
-        }
-        if (calculo > 18.6 && calculo < 24.9){
-
-            String a = "Tu";
-
-            ideal.setText(a);
-
-        }
-        if (calculo > 25 && calculo < 29.9){
-
-            String a = "Tu";
-
-            sobrepeso.setText(a);
-
-        }
-        if (calculo > 30 && calculo < 34.9){
-
-            String a = "Tu";
-
-            obesidad.setText(a);
-
-        }
-        if (calculo > 35 && calculo < 39.9){
-
-            String a = "Tu";
-
-            obesidadsevera.setText(a);
-
-        }
-        if (calculo > 40){
-
-            String a = "Tu";
-
-            obesidadmorbida.setText(a);
-
-        }
+        valorimc = calculo;
+        System.out.println(valorimc);
+        return valorimc;
     }
+
+    public void Tabla(View view){
+        if (valorimc < 0){
+
+
+        }else{
+            if (valorimc < 18.5) {
+
+                String a = "Tu";
+                String b = "";
+                bajopeso.setText(a);
+                ideal.setText(b);
+                sobrepeso.setText(b);
+                obesidad.setText(b);
+                obesidadsevera.setText(b);
+                obesidadmorbida.setText(b);
+
+                String est = "Bajo Peso";
+                estado.setText(est);
+
+
+            }
+            if (valorimc > 18.6 && valorimc < 24.9) {
+
+                String a = "Tu";
+
+                String b = "";
+                bajopeso.setText(b);
+                ideal.setText(a);
+                sobrepeso.setText(b);
+                obesidad.setText(b);
+                obesidadsevera.setText(b);
+                obesidadmorbida.setText(b);
+
+                String est = "Ideal";
+                estado.setText(est);
+
+            }
+            if (valorimc > 25 && valorimc < 29.9) {
+
+                String a = "Tu";
+
+                String b = "";
+                bajopeso.setText(b);
+                ideal.setText(b);
+                sobrepeso.setText(a);
+                obesidad.setText(b);
+                obesidadsevera.setText(b);
+                obesidadmorbida.setText(b);
+
+                String est = "Sobre Peso";
+                estado.setText(est);
+
+            }
+            if (valorimc > 30 && valorimc < 34.9) {
+
+                String a = "Tu";
+
+                String b = "";
+                bajopeso.setText(b);
+                ideal.setText(b);
+                sobrepeso.setText(b);
+                obesidad.setText(a);
+                obesidadsevera.setText(b);
+                obesidadmorbida.setText(b);
+                String est = "Obesidad";
+                estado.setText(est);
+
+            }
+            if (valorimc > 35 && valorimc < 39.9) {
+
+                String a = "Tu";
+
+                String b = "";
+                bajopeso.setText(b);
+                ideal.setText(b);
+                sobrepeso.setText(b);
+                obesidad.setText(b);
+                obesidadsevera.setText(a);
+                obesidadmorbida.setText(b);
+                String est = "Obesidad Severa";
+                estado.setText(est);
+
+            }
+            if (valorimc > 40) {
+
+                String a = "Tu";
+
+                String b = "";
+                bajopeso.setText(b);
+                ideal.setText(b);
+                sobrepeso.setText(b);
+                obesidad.setText(b);
+                obesidadsevera.setText(b);
+                obesidadmorbida.setText(a);
+                String est = "Obesidad Morvida";
+                estado.setText(est);
+            }
+        }
+
+    }
+
 
 }
